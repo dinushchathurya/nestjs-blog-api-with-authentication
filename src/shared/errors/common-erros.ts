@@ -1,5 +1,5 @@
 export const CommonErrors = {
-    Conflict: {
+    EmailExist: {
         statusCode: 409,
         message: 'Email already exists',
         error: "Conflict Error"

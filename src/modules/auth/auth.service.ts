@@ -12,18 +12,25 @@ export class AuthService {
 
     async createUser(createuserDto: CreateUserDto) {
 
+        const existing = await this.userRepository.findOne({ 
+            where: { 
+                email: createuserDto.email 
+            } 
+        });
         const user = await this.userRepository.create(createuserDto);
-        
-        try {
-            await user.save();
-        } catch (err) {
-            if(err.code === 'ER_DUP_ENTRY') {
-                throw new ConflictException(CommonErrors.Conflict);
-            } else {
+
+        if (existing) { 
+            throw new InternalServerErrorException(CommonErrors.EmailExist);
+        }
+        else {
+            try {
+                await user.save();
+            } catch (err) {
                 throw new InternalServerErrorException(CommonErrors.ServerError);
             }
         }
         
+        delete user.password;
         return user;
     }
 }
