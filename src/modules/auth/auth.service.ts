@@ -17,6 +17,7 @@ export class AuthService {
                 email: createuserDto.email 
             } 
         });
+        
         const user = await this.userRepository.create(createuserDto);
 
         if (existing) { 
