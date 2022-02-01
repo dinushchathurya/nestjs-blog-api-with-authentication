@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './modules/auth/auth.module';
+import { BlogModule } from './modules/blog/blog.module';
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { AuthModule } from './modules/auth/auth.module';
         entities: ['dist/**/*.entity.js'],
         synchronize: true,
     }),
-    AuthModule
+    AuthModule,
+    BlogModule
   ],
   controllers: [],
   providers: [],
