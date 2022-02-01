@@ -4,7 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Repository } from 'typeorm';
 
 import { CommonErrors } from 'src/shared/errors/common-erros';
-import { CreateUserDto } from './models/dto/create-user.dto';
+import { AuthRegisterDto } from './models/dto/auth-register.dto';
 import { AuthLoginDto } from './models/dto/auth-login.dto';
 import { User } from './models/entities/user.entity';
 
@@ -13,11 +13,11 @@ export class AuthService {
 
     constructor(@InjectRepository(User) private userRepository: Repository<User>,  private jwtService: JwtService) { }
 
-    async createUser(createuserDto: CreateUserDto) {
+    async register(authRegisterDto: AuthRegisterDto) {
 
-        const existing = await this.findByEmail(createuserDto.email);
+        const existing = await this.findByEmail(authRegisterDto.email);
 
-        const user = await this.userRepository.create(createuserDto);
+        const user = await this.userRepository.create(authRegisterDto);
 
         if (existing) { 
             throw new InternalServerErrorException(CommonErrors.EmailExist);
@@ -64,4 +64,5 @@ export class AuthService {
             },
         });
     }
+
 }
