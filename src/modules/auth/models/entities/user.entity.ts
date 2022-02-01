@@ -1,5 +1,6 @@
-import { BaseEntity, BeforeInsert, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, BeforeInsert, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
+import { Blog } from 'src/modules/blog/models/entities/blog.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -19,6 +20,9 @@ export class User extends BaseEntity {
     @Column()
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @OneToMany(() => Blog, blog => blog.user)
+    blogs: Blog[];
 
     @BeforeInsert()
     async hashPassword() {
