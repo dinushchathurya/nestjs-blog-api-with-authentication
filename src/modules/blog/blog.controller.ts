@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthUser } from 'src/shared/decorators/auth-user.decorator';
 import { BlogService } from './blog.service';
@@ -14,5 +14,10 @@ export class BlogController {
     @Post('create')
     async create(@Body() createBlogDto: CreateBlogDto,  @AuthUser() user: any): Promise<Blog> {
         return await this.blogService.createBlogPost(createBlogDto, user.userId);
+    }
+
+    @Get('')
+    async getAll(): Promise<Blog[]> {
+        return await this.blogService.getAllBlogPosts();
     }
 }
