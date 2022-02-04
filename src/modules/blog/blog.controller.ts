@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Put, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthUser } from 'src/shared/decorators/auth-user.decorator';
 import { BlogService } from './blog.service';
 import { CreateBlogDto } from './models/dto/blog-create.dto';
+import { UpdateBlogDto } from './models/dto/blog-update.dto';
 import { Blog } from './models/entities/blog.entity';
 
 @Controller('blog')
@@ -24,6 +25,12 @@ export class BlogController {
     @Get('/:id')
     async getById(@Req() req): Promise<Blog> {
         return await this.blogService.getBlogPostById(req.params.id);
+    }
+
+    @UseGuards(AuthGuard('jwt'))
+    @Put('/:id')
+    async update(@Req() req, @Body() updateBlogDto:UpdateBlogDto, @AuthUser() user: any): Promise<Blog> {
+        return await this.blogService.updateBlogPost(req.params.id, updateBlogDto, user.userId);
     }
 
     @UseGuards(AuthGuard('jwt'))
