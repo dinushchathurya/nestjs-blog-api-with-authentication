@@ -29,4 +29,14 @@ export class BlogService {
         return await this.blogRepository.find();
     }
 
+    async getBlogPostById(id: number) {
+        const blog = await this.blogRepository.findOne({ id });
+
+        if(blog) {
+            return blog;
+        } else {
+            throw new InternalServerErrorException(CommonErrors.BlogNotFound);
+        }
+    }
+
 }
