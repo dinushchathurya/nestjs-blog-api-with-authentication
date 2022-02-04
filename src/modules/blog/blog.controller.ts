@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Post, Req, UseGuards } from '@nestjs/com
 import { AuthGuard } from '@nestjs/passport';
 import { AuthUser } from 'src/shared/decorators/auth-user.decorator';
 import { BlogService } from './blog.service';
-import { CreateBlogDto } from './models/dto/blog-register.dto';
+import { CreateBlogDto } from './models/dto/blog-create.dto';
 import { Blog } from './models/entities/blog.entity';
 
 @Controller('blog')

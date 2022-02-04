@@ -2,7 +2,7 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CommonErrors } from 'src/shared/errors/common-erros';
 import { Repository } from 'typeorm';
-import { CreateBlogDto } from './models/dto/blog-register.dto';
+import { CreateBlogDto } from './models/dto/blog-create.dto';
 
 import { Blog } from './models/entities/blog.entity';
 
