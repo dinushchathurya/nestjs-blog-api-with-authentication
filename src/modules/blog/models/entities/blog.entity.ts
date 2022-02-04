@@ -20,7 +20,7 @@ export class Blog extends BaseEntity {
     @UpdateDateColumn()
     updatedAt: Date;
 
-    @ManyToOne(() => User, user => user.blogs)
+    @ManyToOne(() => User, user => user.blogs, { eager: true })
     user: User;
 
 }
