@@ -11,7 +11,7 @@ export class User extends BaseEntity {
     @Column({ unique: true })
     email: string;
 
-    @Column({ select: false })
+    @Column()
     @Exclude({ toPlainOnly: true })
     password: string;
 

@@ -65,4 +65,12 @@ export class AuthService {
         });
     }
 
+    async findbyId(id: number) {
+        return await User.findOne({
+            where: {
+                id: id,
+            },
+        });
+    }
+
 }

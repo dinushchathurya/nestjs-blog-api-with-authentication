@@ -39,4 +39,20 @@ export class BlogService {
         }
     }
 
+    async deleteBlogPost(id: number , user:any) {
+
+        const blog = await this.blogRepository.findOne({ id });
+
+        if(!blog) {
+            throw new InternalServerErrorException(CommonErrors.BlogNotFound);
+        }
+
+        if( blog.user.id === user) {
+            await this.blogRepository.delete({ id });
+            return blog;
+        } else {
+            throw new InternalServerErrorException(CommonErrors.NotCreatedError);
+        }
+    }
+
 }
