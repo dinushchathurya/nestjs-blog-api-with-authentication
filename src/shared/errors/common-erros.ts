@@ -34,4 +34,10 @@ export const CommonErrors = {
         message: 'Server Error',
         error: "Server Error"
     },
+
+    NotCreatedError: {
+        statusCode: 401,
+        message: 'You not the owner of this blog post',
+        error: "Unauthorized Error"
+    }
 }

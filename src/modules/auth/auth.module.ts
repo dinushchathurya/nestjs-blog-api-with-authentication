@@ -24,6 +24,7 @@ import { User } from './models/entities/user.entity';
         ),
     ],
     providers: [AuthService, JwtStrategy],
-    controllers: [AuthController]
+    controllers: [AuthController],
+    exports: [AuthService]
 })
 export class AuthModule {}
