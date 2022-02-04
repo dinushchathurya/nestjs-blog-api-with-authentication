@@ -23,6 +23,12 @@ export const CommonErrors = {
         error: "NotFound Error"
     },
 
+    BlogNotFound: {
+        statusCode: 404,
+        message: 'Blog not exists',
+        error: "NotFound Error"
+    },
+
     ServerError: {
         statusCode: 500,
         message: 'Server Error',

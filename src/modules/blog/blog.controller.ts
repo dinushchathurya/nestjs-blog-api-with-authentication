@@ -20,4 +20,9 @@ export class BlogController {
     async getAll(): Promise<Blog[]> {
         return await this.blogService.getAllBlogPosts();
     }
+
+    @Get('/:id')
+    async getById(@Req() req): Promise<Blog> {
+        return await this.blogService.getBlogPostById(req.params.id);
+    }
 }
