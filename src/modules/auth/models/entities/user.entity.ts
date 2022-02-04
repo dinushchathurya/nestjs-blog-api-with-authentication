@@ -1,6 +1,7 @@
 import { BaseEntity, BeforeInsert, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import { Blog } from 'src/modules/blog/models/entities/blog.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class User extends BaseEntity {
@@ -10,7 +11,8 @@ export class User extends BaseEntity {
     @Column({ unique: true })
     email: string;
 
-    @Column()
+    @Column({ select: false })
+    @Exclude({ toPlainOnly: true })
     password: string;
 
     @Column()

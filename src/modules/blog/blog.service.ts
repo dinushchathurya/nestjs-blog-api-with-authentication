@@ -25,4 +25,8 @@ export class BlogService {
 
     }
 
+    async getAllBlogPosts() {
+        return await this.blogRepository.find();
+    }
+
 }
