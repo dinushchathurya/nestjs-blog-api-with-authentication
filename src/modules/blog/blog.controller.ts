@@ -16,7 +16,7 @@ export class BlogController {
         return await this.blogService.createBlogPost(createBlogDto, user.userId);
     }
 
-    @Get('')
+    @Get()
     async getAll(): Promise<Blog[]> {
         return await this.blogService.getAllBlogPosts();
     }
