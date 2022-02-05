@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Roles } from 'src/shared/decorators/role.decorator';
 import { RolesGuard } from 'src/shared/guards/role.guard';
@@ -15,6 +15,11 @@ export class UserController {
     @Get('all')
     async findAll(): Promise<User[]> {
         return this.userService.findAll();
+    }
+
+    @Get('/:id')
+    async findOne(@Req() req){
+        return this.userService.getUserById(req.params.id);
     }
 
 }
