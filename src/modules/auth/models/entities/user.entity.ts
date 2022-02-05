@@ -2,6 +2,7 @@ import { BaseEntity, BeforeInsert, Column, CreateDateColumn, Entity, OneToMany, 
 import * as bcrypt from 'bcryptjs';
 import { Blog } from 'src/modules/blog/models/entities/blog.entity';
 import { Exclude } from 'class-transformer';
+import { UserRole } from 'src/shared/enums/role.enum';
 
 @Entity()
 export class User extends BaseEntity {
@@ -15,6 +16,9 @@ export class User extends BaseEntity {
     @Exclude({ toPlainOnly: true })
     password: string;
 
+    @Column({ type: "enum", enum: UserRole, default: UserRole.USER })
+    role: UserRole;
+    
     @Column()
     @CreateDateColumn()
     createdAt: Date;

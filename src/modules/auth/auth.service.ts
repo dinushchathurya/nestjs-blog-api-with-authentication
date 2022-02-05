@@ -41,6 +41,7 @@ export class AuthService {
         const user = await this.validateUser(authLoginDto);
 
         const payload = {
+            role: user.role,
             userId: user.id,
         };
 
