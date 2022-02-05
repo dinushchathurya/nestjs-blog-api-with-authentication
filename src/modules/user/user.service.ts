@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { CommonErrors } from 'src/shared/errors/common-erros';
+import { createQueryBuilder, Repository } from 'typeorm';
 import { User } from '../auth/models/entities/user.entity';
 
 @Injectable()
@@ -10,5 +11,19 @@ export class UserService {
     
     async findAll(): Promise<User[]> {
         return await this.userRepository.find();
+    }
+
+    async getUserById(id: number) {
+        const user =  await this.userRepository.createQueryBuilder("user")
+                                .leftJoinAndSelect("user.blogs", "blog")
+                                .where("user.id = :id", { id: id })
+                                .getOne();
+
+        if(user){
+            delete user.password;
+            return user;
+        } else {
+            throw new NotFoundException(CommonErrors.UserNotFound);
+        }
     }
 }
