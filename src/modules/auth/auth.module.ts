@@ -8,12 +8,9 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtStrategy } from './jwt.strategy';
 import { User } from './models/entities/user.entity';
-import { MailModule } from '../mail/mail.module';
-
 @Module({
     imports: [
         PassportModule,
-        MailModule,
         JwtModule.registerAsync({
         imports: [ConfigModule],
             useFactory: async () => ({
