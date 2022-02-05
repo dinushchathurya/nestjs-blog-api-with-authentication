@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './modules/auth/auth.module';
 import { BlogModule } from './modules/blog/blog.module';
+import { MailModule } from './modules/mail/mail.module';
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { BlogModule } from './modules/blog/blog.module';
         synchronize: true,
     }),
     AuthModule,
-    BlogModule
+    BlogModule,
+    MailModule
   ],
   controllers: [],
   providers: [],
