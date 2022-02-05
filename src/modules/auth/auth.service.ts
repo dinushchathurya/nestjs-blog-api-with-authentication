@@ -76,6 +76,17 @@ export class AuthService {
         });
     }
 
+    async getLoggedUser(user: any) {
+        const loggedUser =  await this.userRepository.findOne({
+            where: {
+                id: user,
+            },
+        });
+        
+        delete loggedUser.password;
+        return loggedUser;
+    }
+
     async forgotPassword(forgotPasswordDto: ForgotPasswordDto) {
 
         const exists = await this.findByEmail(forgotPasswordDto.email);
