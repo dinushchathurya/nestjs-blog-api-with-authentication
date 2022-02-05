@@ -1,9 +1,11 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthRegisterDto } from './models/dto/auth-register.dto';
 import { AuthLoginDto } from './models/dto/auth-login.dto';
 import { AuthService } from './auth.service';
 import { User } from './models/entities/user.entity';
 import { ForgotPasswordDto } from './models/dto/forgot-password.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { AuthUser } from 'src/shared/decorators/auth-user.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -18,6 +20,12 @@ export class AuthController {
     @Post('login')
     async login(@Body() authLoginDto: AuthLoginDto) {
         return this.authService.login(authLoginDto);
+    }
+    
+    @UseGuards(AuthGuard('jwt'))
+    @Get('profile')
+    getLoggedUser(@AuthUser() user: any){
+        return this.authService.getLoggedUser(user.userId);
     }
 
     @Post('forgot-password')
