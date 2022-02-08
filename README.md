@@ -3,7 +3,7 @@
 ### API Endpoints
 
 | Method  | Endpoint             | Parameters      | Header                |      Description      |
-| ------- |:--------------------:|: --------------:|: --------------------:|: --------------------:|
+| ------- | --------------------|-------------- | -------------------- | --------------------|
 | POST    | api/v1/auth/register |email , password (If Admin: role= admin) | Register new user     |
 | POST    | api/v1/auth/login    |email , password |                       | Login user            |
 | POST    | api/v1/auth/forgot-password  | email   |                       | Forgot password       |
